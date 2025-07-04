@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMA CGM Tracking Portal</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      color: #002f6c;
+    }
+    header {
+      background-color: #002f6c;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header img {
+      height: 40px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+    .container {
+      max-width: 960px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #002f6c;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #e2001a;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .info-box {
+      background-color: #002f6c;
+      padding: 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      color: white;
+      margin-top: 20px;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .info-box::before {
+      content: '📤';
+      position: absolute;
+      left: -40px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 30px;
+      animation: bounce 1s infinite;
+    }
+    .receiver::before {
+      content: '📥';
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(-50%) scale(1); }
+      50% { transform: translateY(-60%) scale(1.2); }
+    }
+    .progress-bar {
+      width: 100%;
+      background-color: #ccc;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+    .progress-bar-fill {
+      height: 20px;
+      background-color: #002f6c;
+      width: 75%;
+      text-align: center;
+      color: white;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      border-radius: 10px;
+    }
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #e2001a;
+      font-weight: bold;
+    }
+    #details { display: none; }
+    .print-btn {
+      text-align: right;
+      margin-top: 20px;
+    }
+    table.package-table {
+      width: 100%;
+      margin-top: 10px;
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+    table.package-table td {
+      padding: 10px 15px;
+      background-color: #eef3fa;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://www.cma-cgm.com/static/images/logo.png" alt="CMA CGM Logo">
+    <span>CMA CGM TRACKING PORTAL</span>
+  </header>
+
+  <div class="container">
+    <h2>Track Your Shipment</h2>
+    <input type="text" id="trackingInput" placeholder="Enter your tracking code (e.g. CMACGM123456789)">
+    <button onclick="trackPackage()">Track</button>
+
+    <div class="print-btn">
+      <button onclick="window.print()">Print</button>
+    </div>
+
+    <div id="details">
+      <h3>Shipment Details</h3>
+      <div class="info-box">Tracking Code: <span id="trackCode"></span></div>
+      <div class="info-box">Delivery Date: 3rd July 2025</div>
+
+      <h4>Sender Information</h4>
+      <div class="info-box">
+        Name: Min Jun<br>
+        Location: London<br>
+        Email: mjun2327@gmail.com<br>
+        Phone: +44 7985 293148
+      </div>
+
+      <h4>Receiver Information</h4>
+      <div class="info-box receiver">
+        Name: Daniela Cuellar<br>
+        Address: Cra. 87 Bis #57-83, Bosa, Bogotá, Colombia<br>
+        Email: danielaisabelcuellar97@gmail.com<br>
+        Phone: +57 313 4819998<br>
+        Country: Colombia
+      </div>
+
+      <h4>Package Info</h4>
+      <table class="package-table">
+        <tr>
+          <td>Weight: 23kg</td>
+          <td>Destination: Colombia</td>
+          <td>Mode of Transport: Freight</td>
+        </tr>
+      </table>
+
+      <h4>Progress</h4>
+      <div class="progress-bar">
+        <div class="progress-bar-fill">75% - Customs</div>
+      </div>
+      <p>1. Dispatched &rarr; 2. In Transit &rarr; 3. Customs &rarr; 4. Out for Delivery</p>
+
+      <h4>Delivery Route Map</h4>
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d31821.197486435693!2d-74.2115234!3d4.6164091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x8e469850a29fb3c9%3A0x28531e846398d3c!2sJos%C3%A9%20Mar%C3%ADa%20C%C3%B3rdova%20International%20Airport!3m2!1d6.1649076!2d-75.4235276!4m5!1s0x8e3f9a7c6aa0a4c5%3A0xc5d82f07370e299!2sCra.%2087%20Bis%20%2357-83%2C%20Bosa%2C%20Bogot%C3%A1%2C%20Colombia!3m2!1d4.6149371!2d-74.2075074!5e0!3m2!1sen!2sco!4v1720097471506!5m2!1sen!2sco" 
+        width="100%" 
+        height="400" 
+        style="border:0; border-radius: 10px;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+      <p><strong>Approx. Distance:</strong> 471 km — <strong>Estimated Time:</strong> ~9 hours by road</p>
+    </div>
+  </div>
+
+  <div class="footer">THANKS FOR USING CMA-CGM</div>
+
+  <script>
+    const validCode = "CMACGM123456789";
+    function trackPackage() {
+      const input = document.getElementById("trackingInput").value.trim();
+      if (input === validCode) {
+        document.getElementById("details").style.display = "block";
+        document.getElementById("trackCode").innerText = input;
+      } else {
+        alert("Tracking code not found. Please check and try again.");
+        document.getElementById("details").style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
